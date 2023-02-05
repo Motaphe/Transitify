@@ -55,7 +55,8 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: Text('Transitify'),
       ),
-      body: Container(
+      resizeToAvoidBottomInset: false,
+      body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
             Container(
@@ -76,7 +77,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 },
               ),
             ),
-            SingleChildScrollView(child: MyStatefulWidget2()),
+            MyStatefulWidget2(),
           ],
         ),
       ),
