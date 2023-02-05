@@ -73,15 +73,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                 },
               ),
             )
-          : Column(
-              children: [
-                ExpansionPanel(
-                    headerBuilder: (context, isExpanded) {
-                      return Text("MARTA");
-                    },
-                    body: Text("If you use MARTA today: Price: ")),
-              ],
-            ),
+          : Container(),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
