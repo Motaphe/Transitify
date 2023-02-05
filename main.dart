@@ -2,6 +2,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
+const double lat = 33.753746;
+const double long = -84.386330;
+const double zoom = 14.4746;
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -61,15 +65,24 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
               ),
               child: GoogleMap(
                 initialCameraPosition: CameraPosition(
-                  target: LatLng(33.753746, -84.386330),
-                  zoom: 14.4746,
+                  target: LatLng(lat, long),
+                  zoom: zoom,
                 ),
                 onMapCreated: (GoogleMapController controller) {
                   _controller.complete(controller);
                 },
               ),
             )
-          : Container(),
+          : Column(
+            children: [
+                ExpansionPanel(
+                  headerBuilder: (context, isExpanded) {
+                    return Text("MARTA");
+                  },
+                  body: Text("If you use MARTA today: Price: ")
+                ),
+              ],
+            ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
