@@ -5,21 +5,14 @@ class Item {
   Item({
     required this.expandedValue,
     required this.headerValue,
+    required this.icon,
     this.isExpanded = false,
   });
 
   String expandedValue;
   String headerValue;
+  IconData icon;
   bool isExpanded;
-}
-
-List<Item> generateItems(int numberOfItems) {
-  return List<Item>.generate(numberOfItems, (int index) {
-    return Item(
-      headerValue: 'Panel $index',
-      expandedValue: 'This is item number $index',
-    );
-  });
 }
 
 class MyStatefulWidget2 extends StatefulWidget {
@@ -30,7 +23,24 @@ class MyStatefulWidget2 extends StatefulWidget {
 }
 
 class _MyStatefulWidgetState extends State<MyStatefulWidget2> {
-  final List<Item> _data = generateItems(3);
+  final List<Item> _data = [
+    Item(
+        headerValue: 'Public Transport(MARTA)',
+        expandedValue: 'This is panel 1',
+        icon: Icons.train),
+    Item(
+        headerValue: 'UBER',
+        expandedValue: 'This is panel 2',
+        icon: Icons.local_taxi),
+    Item(
+        headerValue: 'Walk',
+        expandedValue: 'This is panel 3',
+        icon: Icons.directions_walk),
+    Item(
+        headerValue: 'Car',
+        expandedValue: 'This is panel 4',
+        icon: Icons.directions_car),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -52,7 +62,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget2> {
         return ExpansionPanel(
           headerBuilder: (BuildContext context, bool isExpanded) {
             return ListTile(
-              leading: _getRandomIcon(),
+              leading: Icon(item.icon, color: Colors.black),
               title: Text(item.headerValue),
             );
           },
@@ -60,20 +70,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget2> {
           isExpanded: item.isExpanded,
         );
       }).toList(),
-    );
-  }
-
-  Icon _getRandomIcon() {
-    final List<IconData> icons = [
-      Icons.directions_bus,
-      Icons.directions_subway,
-      Icons.train,
-      Icons.tram,
-      Icons.directions_railway
-    ];
-    return Icon(
-      icons[Random().nextInt(icons.length)],
-      color: Colors.black,
     );
   }
 }

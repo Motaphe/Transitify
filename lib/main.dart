@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 import 'main2.dart';
 
 const double lat = 33.753746;
@@ -51,36 +52,42 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   @override
   Widget build(BuildContext context) {
+    Widget body;
+
+    if (_selectedIndex == 0) {
+      body = Column(
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height / 2,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: Colors.black,
+                width: 3,
+              ),
+            ),
+            child: GoogleMap(
+              initialCameraPosition: CameraPosition(
+                target: LatLng(lat, long),
+                zoom: zoom,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+            ),
+          ),
+          MyStatefulWidget2(),
+        ],
+      );
+    } else {
+      body = Container();
+    }
+
     return Scaffold(
       appBar: AppBar(
         title: Text('Transitify'),
       ),
       resizeToAvoidBottomInset: false,
-      body: SingleChildScrollView(
-        child: Column(
-          children: <Widget>[
-            Container(
-              height: MediaQuery.of(context).size.height / 2,
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.black,
-                  width: 3,
-                ),
-              ),
-              child: GoogleMap(
-                initialCameraPosition: CameraPosition(
-                  target: LatLng(lat, long),
-                  zoom: zoom,
-                ),
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-              ),
-            ),
-            MyStatefulWidget2(),
-          ],
-        ),
-      ),
+      body: SingleChildScrollView(child: body),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
