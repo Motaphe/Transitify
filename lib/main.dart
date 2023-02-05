@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'main2.dart';
 
 const double lat = 33.753746;
 const double long = -84.386330;
@@ -54,8 +55,10 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       appBar: AppBar(
         title: Text('Transitify'),
       ),
-      body: _selectedIndex == 0
-          ? Container(
+      body: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
               height: MediaQuery.of(context).size.height / 2,
               decoration: BoxDecoration(
                 border: Border.all(
@@ -72,8 +75,11 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
                   _controller.complete(controller);
                 },
               ),
-            )
-          : Container(),
+            ),
+            SingleChildScrollView(child: MyStatefulWidget2()),
+          ],
+        ),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
           BottomNavigationBarItem(
