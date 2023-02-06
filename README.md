@@ -1,4 +1,4 @@
-# idea11
+# UGAHACKS | TRANSITIFY
 
 A new Flutter project.
 
