@@ -1,4 +1,4 @@
-# UGAHACKS | TRANSITIFY
+# UGAHACKS | RIDE WISELY
 
 A new Flutter project.
 
